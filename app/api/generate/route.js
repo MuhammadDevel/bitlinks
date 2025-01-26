@@ -16,6 +16,7 @@ export async function POST(request) {
         const db = client.db("bitlinks");
         const collection = db.collection("url");
 
+        await collection.createIndex({ Shorturl: 1 }, { unique: true });
         // Check if the short URL exists
         const doc = await collection.findOne({ Shorturl: body.shorturl });
         if (doc) {
